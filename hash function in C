@@ -1,0 +1,64 @@
+/*HASH TABLE + FUNCTIONS
+*Created by: Deniz Seyidoğlu
+*You can modify or study on it as long as you do not publish this code without my permission.
+*This simply created because i did not find any hash function sample avaible in C language
+*and I wanted to create and publish one.  Some veriable's might feel complex but this was not 
+*intented to publish beforehand so, sorry for that. I hope this helps! 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct s {
+	int a;
+	struct s *next;
+}S;
+int hash(int x) { return x % 10; }
+void add(S*, S*);
+void print(S *h);
+void main(void){
+	int index, i, n;
+	char c;
+	S *new;
+	S h[10]; //hash table
+	for(i=0;i<10;i++) h[i].next = NULL; // nulify
+	printf("How much data do you like to add to hash table ? :");  //ask about data
+	scanf("%d",&n);
+	for(i=0;i<n;i++){						      //for loop for data acquisition
+		new = malloc(sizeof(S));				      //malloc for new data	
+		printf("Enter a number : ");
+		scanf("%d", &new->a);
+		index = hash(new->a);
+		add(&h[index], new);
+	}
+	do {								    //user might want to see another hash table
+	printf("Enter the index of the hash table you want to see : ");
+	scanf("%d",&index);
+	print(&h[index]);
+	printf("Do you want to continue entering another index for the hash table you want to see ? (y/n) : ");
+	fflush(stdin);
+	scanf("%c",&c);
+	}while (c != 'n' && c != 'N');
+	free(new);
+}
+
+
+void add (S* h, S *new){						//this funtion adds data's in descending order
+	S *prev, *temp;
+	prev = h;
+	temp = h->next;
+	while (temp!=NULL && temp->a < new->a){			// when temp is null we understand that the table
+		prev = temp;						//dont have any more data, right side of the && 
+		temp = temp->next;					// operand controls the descending order
+	}
+	new->next=temp;
+	prev->next=new;						//breaking links and adding new one
+}
+
+void print(S *h){
+	S *temp;
+	temp = h->next;
+	for(temp = h->next; temp != NULL; temp = temp->next){	//prints until there is nothing left.
+		printf("%d-->", temp->a);
+	}
+	printf("NULL\n");
+}
