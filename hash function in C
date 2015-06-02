@@ -4,6 +4,7 @@
 *This simply created because i did not find any hash function sample avaible in C language
 *and I wanted to create and publish one.  Some veriable's might feel complex but this was not 
 *intented to publish beforehand so, sorry for that. I hope this helps! 
+*THIS IS NOT A PROFESSIONAL CODE BY ANY MEANS. 
 */
 
 #include <stdio.h>
