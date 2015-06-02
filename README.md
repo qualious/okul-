@@ -1,1 +1,1 @@
-# This is my study files for my school education.
+This is my study codes for my school.
